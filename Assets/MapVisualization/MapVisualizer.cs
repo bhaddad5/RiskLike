@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class MapVisualizer : MonoBehaviour
 {
-	private MapData map;
+	private MapData Map;
 
 	public void Setup(MapData m)
 	{
-		map = m;
-		GetComponent<MeshRenderer>().material.mainTexture = map.MapRegions;
+		Map = m;
+		GetComponent<MeshRenderer>().material.mainTexture = Map.MapRegionsTexture;
 
 	}
 
 	public RegionData GetRegionAtCoordinate(Vector2 uvCoord)
 	{
-		int x = (int)(uvCoord.x * map.MapRegions.width);
-		int y = (int)(uvCoord.y * map.MapRegions.height);
-		var color = map.MapRegions.GetPixel(x, y);
-		foreach (RegionData region in map.Regions)
+		int x = (int)(uvCoord.x * Map.MapRegionsTexture.width);
+		int y = (int)(uvCoord.y * Map.MapRegionsTexture.height);
+		var color = Map.MapRegionsTexture.GetPixel(x, y);
+		foreach (RegionData region in Map.Regions)
 		{
 			if (color.Equals(region.Color))
 				return region;

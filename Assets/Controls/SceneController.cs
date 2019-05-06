@@ -5,12 +5,12 @@ using UnityEngine;
 public class SceneController : MonoBehaviour
 {
 	[SerializeField] private MapVisualizer mapVisPrefab;
-	[SerializeField] private MapData map;
+	[SerializeField] private StoredMapData storedMap;
 
     // Start is called before the first frame update
     void Start()
     {
 	    var vis = GameObject.Instantiate(mapVisPrefab);
-		vis.Setup(map);
+		vis.Setup(new MapData(storedMap));
     }
 }

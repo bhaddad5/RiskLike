@@ -13,6 +13,15 @@ public class WorldInteractor : MonoBehaviour
 			{
 				var region = hit.transform.GetComponent<MapVisualizer>().GetRegionAtCoordinate(hit.textureCoord);
 				Debug.Log(region.Name);
+				foreach (RegionData borderingRegion in region.BorderingRegions)
+				{
+					Debug.Log("Borders: " + borderingRegion.Name);
+				}
+
+				foreach (Vector2 unitPos in region.UnitPositions)
+				{
+					Debug.Log("Unit Pos: " + unitPos);
+				}
 			}
 		}
 	}

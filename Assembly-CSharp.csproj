@@ -63,6 +63,8 @@
     <Compile Include="Assets\Controls\CameraController.cs" />
     <Compile Include="Assets\Controls\SceneController.cs" />
     <Compile Include="Assets\Controls\WorldInteractor.cs" />
+    <Compile Include="Assets\Maps\StoredMapData.cs" />
+    <Compile Include="Assets\Maps\StoredRegionData.cs" />
     <Compile Include="Assets\MapVisualization\MapData.cs" />
     <Compile Include="Assets\MapVisualization\MapVisualizer.cs" />
     <Compile Include="Assets\MapVisualization\RegionData.cs" />
