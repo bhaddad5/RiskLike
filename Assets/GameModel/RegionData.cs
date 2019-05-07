@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class RegionData
 {
-	public string Name;
+	public Setting<string> Name = new Setting<string>();
+	public NotifyList<UnitData> Units = new NotifyList<UnitData>();
+
 	public Color Color;
 	public List<RegionData> BorderingRegions = new List<RegionData>();
 	public List<Vector2> UnitPositions;
+	public Vector2 RegionCenter;
 
 	public RegionData(StoredRegionData storedRegion, List<Vector2> unitPositions)
 	{
-		Name = storedRegion.Name;
+		Name.Value = storedRegion.Name;
 		Color = storedRegion.Color;
 		UnitPositions = unitPositions;
+
+		foreach (StoredIndividualUnitData storedUnit in storedRegion.ContainedUnits)
+			Units.Add(new UnitData(storedUnit, this));
 	}
 
 	public void AddBorderRegion(RegionData borderingRegion)

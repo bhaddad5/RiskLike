@@ -8,4 +8,6 @@ public class StoredRegionData
 {
 	public string Name;
 	public Color Color;
+
+	public List<StoredIndividualUnitData> ContainedUnits;
 }

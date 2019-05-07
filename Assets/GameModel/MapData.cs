@@ -18,7 +18,6 @@ public class MapData
 		Name = storedMap.Name;
 		MapRegionsTexture = new Texture2D(storedMap.MapRegions.width, storedMap.MapRegions.height, TextureFormat.RGB24, false);
 		Graphics.CopyTexture(storedMap.MapRegions, MapRegionsTexture);
-		//MapRegionsTexture.SetPixels(storedMap.MapRegions.GetPixels());
 
 		foreach (StoredRegionData storedRegionData in storedMap.Regions)
 		{

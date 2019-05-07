@@ -9,9 +9,18 @@ public class WorldInteractor : MonoBehaviour
 		if (Input.GetMouseButtonUp(0))
 		{
 			RaycastHit hit;
+			if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Units")))
+			{
+				var unit = hit.transform.GetComponentInParent<UnitVisualizer>();
+				Debug.Log(unit.gameObject.name);
+
+				return;
+			}
+
 			if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Map")))
 			{
-				var region = hit.transform.GetComponent<MapVisualizer>().GetRegionAtCoordinate(hit.textureCoord);
+				var point = hit.point / MapVisualizer.MapScaler;
+				var region = hit.transform.GetComponentInParent<MapVisualizer>().GetRegionAtCoordinate(new Vector2(point.x, point.z));
 				Debug.Log(region.Name);
 				foreach (RegionData borderingRegion in region.BorderingRegions)
 				{
@@ -22,6 +31,8 @@ public class WorldInteractor : MonoBehaviour
 				{
 					Debug.Log("Unit Pos: " + unitPos);
 				}
+
+				return;
 			}
 		}
 	}

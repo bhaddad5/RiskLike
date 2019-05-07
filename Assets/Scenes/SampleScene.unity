@@ -218,16 +218,31 @@ MonoBehaviour:
     Regions:
     - Name: Black
       Color: {r: 0, g: 0, b: 0, a: 1}
+      ContainedUnits: []
     - Name: Blue
       Color: {r: 0, g: 0, b: 1, a: 1}
+      ContainedUnits:
+      - UnitName: 1st Green Cube
+        TypeId: GreenCube
+        HealthPercent: 1
     - Name: Red
       Color: {r: 1, g: 0, b: 0, a: 1}
+      ContainedUnits:
+      - UnitName: 1st Blue Sphere
+        TypeId: BlueSphere
+        HealthPercent: 1
+      - UnitName: 2nd Blue Sphere
+        TypeId: BlueSphere
+        HealthPercent: 1
     - Name: Yellow
       Color: {r: 1, g: 1, b: 0, a: 1}
+      ContainedUnits: []
     - Name: Green
       Color: {r: 0, g: 1, b: 0, a: 1}
+      ContainedUnits: []
     - Name: Cyane
       Color: {r: 0, g: 1, b: 1, a: 1}
+      ContainedUnits: []
 --- !u!4 &233892945
 Transform:
   m_ObjectHideFlags: 0
@@ -350,3 +365,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e859593bff96094e9f46508e2548f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &739511220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739511223}
+  - component: {fileID: 739511222}
+  - component: {fileID: 739511221}
+  m_Layer: 0
+  m_Name: UnitLookup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &739511221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739511220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3fba64fdae8694a92497a26282dc26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - Id: GreenCube
+    Prefab: {fileID: 9213885448895196236, guid: 84d2a6bfccfd879438541abd93c8a20d,
+      type: 3}
+  - Id: BlueSphere
+    Prefab: {fileID: 3064877330483126524, guid: 292462ff44e16644d8a12cd8e6a8feca,
+      type: 3}
+--- !u!114 &739511222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739511220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e21def8cda0524db3d4c87de37109e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  units:
+  - Id: GreenCube
+    TypeName: Green Cube
+    Attack: 1
+    Defense: 2
+    Movement: 1
+    Health: 3
+    PrefabId: GreenCube
+  - Id: BlueSphere
+    TypeName: Blue Sphere
+    Attack: 2
+    Defense: 1
+    Movement: 2
+    Health: 4
+    PrefabId: BlueSphere
+--- !u!4 &739511223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739511220}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1523400812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523400813}
+  m_Layer: 0
+  m_Name: WellKnownAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1523400813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523400812}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

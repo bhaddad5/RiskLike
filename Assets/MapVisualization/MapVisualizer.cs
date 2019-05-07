@@ -5,20 +5,35 @@ using UnityEngine;
 
 public class MapVisualizer : MonoBehaviour
 {
+	[SerializeField] private GameObject regionPrefab;
+
+	public static float MapScaler = .05f;
+
 	private MapData Map;
 
 	public void Setup(MapData m)
 	{
 		Map = m;
-		GetComponent<MeshRenderer>().material.mainTexture = Map.MapRegionsTexture;
+		GetComponentInChildren<MeshRenderer>().material.mainTexture = Map.MapRegionsTexture;
+
+		transform.localScale = new Vector3(Map.MapRegionsTexture.width, 0, Map.MapRegionsTexture.height) * MapScaler;
+		transform.localPosition = new Vector3(transform.localScale.x/2f, 0, transform.localScale.z/2f);
+		gameObject.GetComponent<BoxCollider>().size = transform.localScale;
+		
+		foreach (RegionData region in m.Regions)
+		{
+			var r = GameObject.Instantiate(regionPrefab);
+			r.AddComponent<RegionVisualization>().Setup(region);
+		}
 
 	}
 
-	public RegionData GetRegionAtCoordinate(Vector2 uvCoord)
+	public RegionData GetRegionAtCoordinate(Vector2 pos)
 	{
-		int x = (int)(uvCoord.x * Map.MapRegionsTexture.width);
-		int y = (int)(uvCoord.y * Map.MapRegionsTexture.height);
-		var color = Map.MapRegionsTexture.GetPixel(x, y);
+		var color = Map.MapRegionsTexture.GetPixel((int)pos.x, (int)pos.y);
+
+		Debug.Log(color);
+
 		foreach (RegionData region in Map.Regions)
 		{
 			if (color.Equals(region.Color))
