@@ -6,37 +6,51 @@ public class WorldInteractor : MonoBehaviour
 {
 	public MovementPathVisualizer PathVis;
 
+	private RegionData currPointedRegion = null;
+	private UnitData currSelectedUnit = null;
+
 	void Update()
 	{
+		currPointedRegion = null;
+		RaycastHit hit;
+		if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Map")))
+		{
+			var point = hit.point / MapVisualizer.MapScaler;
+			var region = hit.transform.GetComponentInParent<MapVisualizer>().GetRegionAtCoordinate(new Vector2(point.x, point.z));
+			currPointedRegion = region;
+		}
+
 		if (Input.GetMouseButtonUp(0))
 		{
-			RaycastHit hit;
+			currSelectedUnit = null;
+			
 			if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Units")))
 			{
 				var unit = hit.transform.GetComponentInParent<UnitVisualizer>();
-				Debug.Log(unit.gameObject.name);
-
-				return;
+				currSelectedUnit = unit.Unit;
 			}
+		}
 
-			if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Map")))
+		if (currSelectedUnit != null && currPointedRegion != null &&
+		    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion)
+		{
+			PathVis.VisualizePath(new List<Vector3>()
 			{
-				var point = hit.point / MapVisualizer.MapScaler;
-				var region = hit.transform.GetComponentInParent<MapVisualizer>().GetRegionAtCoordinate(new Vector2(point.x, point.z));
-				Debug.Log(region.Name);
-				foreach (RegionData borderingRegion in region.BorderingRegions)
-				{
-					PathVis.VisualizePath(new List<Vector3>(){ RegionCenterToWorldPos(region.RegionCenter), RegionCenterToWorldPos(borderingRegion.RegionCenter)});
+				RegionCenterToWorldPos(currSelectedUnit.CurrentOccupiedRegion.Value.RegionCenter),
+				RegionCenterToWorldPos(currPointedRegion.RegionCenter)
+			});
+		}
+		else
+		{
+			PathVis.VisualizePath(new List<Vector3>());
+		}
 
-					//Debug.Log("Borders: " + borderingRegion.Name);
-				}
-
-				foreach (Vector2 unitPos in region.UnitPositions)
-				{
-					//Debug.Log("Unit Pos: " + unitPos);
-				}
-
-				return;
+		if (Input.GetMouseButtonUp(1))
+		{
+			if (currSelectedUnit != null && currPointedRegion != null &&
+			    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion)
+			{
+				currSelectedUnit.SetRegion(currPointedRegion);
 			}
 		}
 	}

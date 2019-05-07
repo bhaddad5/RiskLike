@@ -35,4 +35,11 @@ public class UnitData
 
 		CurrentOccupiedRegion.Value = region;
 	}
+
+	public void SetRegion(RegionData region)
+	{
+		CurrentOccupiedRegion.Value?.Units?.Remove(this);
+		region.Units.Add(this);
+		CurrentOccupiedRegion.Value = region;
+	}
 }
