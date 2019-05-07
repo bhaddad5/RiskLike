@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RegionVisualization : MonoBehaviour
 {
+	public UnitVisualizer UnitPrefab;
+
 	private RegionData region;
 
 	public void Setup(RegionData region)
@@ -12,8 +14,8 @@ public class RegionVisualization : MonoBehaviour
 		this.region = region;
 		foreach (UnitData unit in region.Units)
 		{
-			var instantiatedUnit = GameObject.Instantiate(UnitPrefabsLookup.GetUnitPrefabDataById(unit.PrefabId));
-			instantiatedUnit.AddComponent<UnitVisualizer>().Setup(unit);
+			var instantiatedUnit = GameObject.Instantiate(UnitPrefab);
+			instantiatedUnit.Setup(unit);
 		}
 
 		var pos = region.RegionCenter * MapVisualizer.MapScaler;

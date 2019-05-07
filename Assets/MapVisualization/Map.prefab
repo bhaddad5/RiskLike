@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2af66e84412c84449d63976c192a9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionPrefab: {fileID: 7681725900763896706, guid: 235c3d79810e5d54bb8d7a1930be69f0,
+  regionPrefab: {fileID: 8783992553551983895, guid: 235c3d79810e5d54bb8d7a1930be69f0,
     type: 3}
 --- !u!65 &486588882998359083
 BoxCollider:

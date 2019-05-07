@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WorldInteractor : MonoBehaviour
 {
+	public MovementPathVisualizer PathVis;
+
 	void Update()
 	{
 		if (Input.GetMouseButtonUp(0))
@@ -24,16 +26,23 @@ public class WorldInteractor : MonoBehaviour
 				Debug.Log(region.Name);
 				foreach (RegionData borderingRegion in region.BorderingRegions)
 				{
-					Debug.Log("Borders: " + borderingRegion.Name);
+					PathVis.VisualizePath(new List<Vector3>(){ RegionCenterToWorldPos(region.RegionCenter), RegionCenterToWorldPos(borderingRegion.RegionCenter)});
+
+					//Debug.Log("Borders: " + borderingRegion.Name);
 				}
 
 				foreach (Vector2 unitPos in region.UnitPositions)
 				{
-					Debug.Log("Unit Pos: " + unitPos);
+					//Debug.Log("Unit Pos: " + unitPos);
 				}
 
 				return;
 			}
 		}
+	}
+
+	private Vector3 RegionCenterToWorldPos(Vector2 regionCenter)
+	{
+		return new Vector3(regionCenter.x * MapVisualizer.MapScaler, 0, regionCenter.y * MapVisualizer.MapScaler);
 	}
 }

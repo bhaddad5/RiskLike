@@ -29,7 +29,7 @@ public class UnitData
 		Attack = storedUnitType.Attack;
 		Defense = storedUnitType.Defense;
 		Movement.Value = storedUnitType.Movement;
-		HP .Value = unitData.HealthPercent * storedUnitType.Health;
+		HP.Value = unitData.HealthPercent * storedUnitType.Health;
 
 		PrefabId = storedUnitType.PrefabId;
 

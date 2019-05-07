@@ -5,19 +5,22 @@ using UnityEngine;
 public class MovementPathVisualizer : MonoBehaviour
 {
 	public MovementArrowVisualizer ArrowPrefab;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-	    var arrow1 = GameObject.Instantiate(ArrowPrefab);
-		arrow1.Setup(new Vector3(0, 0, 0), new Vector3(3, 0, 5));
-
-	    var arrow2 = GameObject.Instantiate(ArrowPrefab);
-	    arrow2.Setup(new Vector3(3, 0, 5), new Vector3(7, 0, 2));
-	}
+	
+	private List<MovementArrowVisualizer> currentlyRenderedPath = new List<MovementArrowVisualizer>();
 
 	public void VisualizePath(List<Vector3> path)
 	{
+		foreach (MovementArrowVisualizer movementArrowVisualizer in currentlyRenderedPath)
+			GameObject.Destroy(movementArrowVisualizer.gameObject);
+		currentlyRenderedPath.Clear();
 
+		for (int i = 0; i < path.Count; i++)
+		{
+			if (i == 0)
+				continue;
+			var arrow = GameObject.Instantiate(ArrowPrefab);
+			arrow.Setup(path[i-1], path[i]);
+			currentlyRenderedPath.Add(arrow);
+		}
 	}
 }

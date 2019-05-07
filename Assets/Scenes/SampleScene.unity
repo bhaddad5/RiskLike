@@ -233,7 +233,7 @@ MonoBehaviour:
         HealthPercent: 1
       - UnitName: 2nd Blue Sphere
         TypeId: BlueSphere
-        HealthPercent: 1
+        HealthPercent: 0.6
     - Name: Yellow
       Color: {r: 1, g: 1, b: 0, a: 1}
       ContainedUnits: []
@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7802b068c873ba0469e73062f0763816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PathVis: {fileID: 1400017241}
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0

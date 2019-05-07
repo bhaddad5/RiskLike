@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MapVisualizer : MonoBehaviour
 {
-	[SerializeField] private GameObject regionPrefab;
+	[SerializeField] private RegionVisualization regionPrefab;
 
 	public static float MapScaler = .05f;
 
@@ -23,7 +23,7 @@ public class MapVisualizer : MonoBehaviour
 		foreach (RegionData region in m.Regions)
 		{
 			var r = GameObject.Instantiate(regionPrefab);
-			r.AddComponent<RegionVisualization>().Setup(region);
+			r.Setup(region);
 		}
 
 	}
@@ -31,8 +31,6 @@ public class MapVisualizer : MonoBehaviour
 	public RegionData GetRegionAtCoordinate(Vector2 pos)
 	{
 		var color = Map.MapRegionsTexture.GetPixel((int)pos.x, (int)pos.y);
-
-		Debug.Log(color);
 
 		foreach (RegionData region in Map.Regions)
 		{

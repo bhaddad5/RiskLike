@@ -1,21 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitVisualizer : MonoBehaviour
 {
-	private UnitData unit;
+	public TMP_Text UnitName;
+	public Image HealthBar;
+	public Image HealthBarBacking;
+
+	public UnitData Unit;
 
 	public void Setup(UnitData unit)
 	{
-		this.unit = unit;
-		unit.CurrentOccupiedRegion.ChangeEvent += CurrentOccupiedRegionOnChangeEvent;
+		Unit = unit;
+		Unit.CurrentOccupiedRegion.ChangeEvent += CurrentOccupiedRegionOnChangeEvent;
 		CurrentOccupiedRegionOnChangeEvent(unit.CurrentOccupiedRegion.Value, null);
+
+		var instantiatedPrefab = GameObject.Instantiate(UnitPrefabsLookup.GetUnitPrefabDataById(unit.PrefabId), transform, false);
+
+		float baseSize = 10f;
+		HealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(unit.MaxHP * baseSize, baseSize);
+		HealthBarBacking.GetComponent<RectTransform>().sizeDelta = new Vector2(unit.MaxHP * baseSize, baseSize);
+
+		Unit.Name.ChangeEvent += NameOnChangeEvent;
+		NameOnChangeEvent(Unit.Name.Value, null);
+
+		Unit.HP.ChangeEvent += HpOnChangeEvent;
+		HpOnChangeEvent(Unit.HP.Value, 0);
+	}
+
+	private void HpOnChangeEvent(float arg1, float arg2)
+	{
+		HealthBar.fillAmount = arg1 / Unit.MaxHP;
+	}
+
+	private void NameOnChangeEvent(string arg1, string arg2)
+	{
+		UnitName.text = arg1;
 	}
 
 	private void CurrentOccupiedRegionOnChangeEvent(RegionData arg1, RegionData arg2)
 	{
-		var unitIndex = arg1.Units.IndexOf(unit);
+		var unitIndex = arg1.Units.IndexOf(Unit);
 		var pos = arg1.UnitPositions[unitIndex];
 
 		transform.position = new Vector3(pos.x, 0, pos.y) * MapVisualizer.MapScaler;
@@ -23,6 +51,8 @@ public class UnitVisualizer : MonoBehaviour
 
 	void OnDestroy()
 	{
-		unit.CurrentOccupiedRegion.ChangeEvent -= CurrentOccupiedRegionOnChangeEvent;
+		Unit.CurrentOccupiedRegion.ChangeEvent -= CurrentOccupiedRegionOnChangeEvent;
+		Unit.Name.ChangeEvent -= NameOnChangeEvent;
+		Unit.HP.ChangeEvent -= HpOnChangeEvent;
 	}
 }
