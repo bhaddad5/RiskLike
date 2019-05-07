@@ -73,6 +73,8 @@
     <Compile Include="Assets\GameModel\RegionData.cs" />
     <Compile Include="Assets\GameModel\UnitData.cs" />
     <Compile Include="Assets\MapVisualization\MapVisualizer.cs" />
+    <Compile Include="Assets\MapVisualization\MovementArrowVisualizer.cs" />
+    <Compile Include="Assets\MapVisualization\MovementPathVisualizer.cs" />
     <Compile Include="Assets\MapVisualization\RegionVisualization.cs" />
     <Compile Include="Assets\MapVisualization\UnitVisualizer.cs" />
     <Compile Include="Assets\SharedHelpers\NotifyList.cs" />
