@@ -16,6 +16,9 @@ public class RegionVisualization : MonoBehaviour
 			instantiatedUnit.AddComponent<UnitVisualizer>().Setup(unit);
 		}
 
+		var pos = region.RegionCenter * MapVisualizer.MapScaler;
+		transform.localPosition = new Vector3(pos.x, 0, pos.y);
+
 		region.Name.ChangeEvent += NameOnChangeEvent;
 		NameOnChangeEvent(region.Name.Value, null);
 	}

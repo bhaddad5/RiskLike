@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapData
@@ -12,6 +13,7 @@ public class MapData
 
 	private Dictionary<Color, List<Color>> cachedBorders = new Dictionary<Color, List<Color>>();
 	private Dictionary<Color, List<Vector2>> cachedUntiPositions = new Dictionary<Color, List<Vector2>>();
+	private Dictionary<Color, List<Vector2>> cachedRegionPoints = new Dictionary<Color, List<Vector2>>();
 
 	public MapData(StoredMapData storedMap)
 	{
@@ -23,6 +25,7 @@ public class MapData
 		{
 			cachedBorders[storedRegionData.Color] = new List<Color>();
 			cachedUntiPositions[storedRegionData.Color] = new List<Vector2>();
+			cachedRegionPoints[storedRegionData.Color] = new List<Vector2>();
 		}
 
 		for (int i = 0; i < MapRegionsTexture.width; i++)
@@ -34,7 +37,7 @@ public class MapData
 			CheckBorders(i, j);
 
 		foreach (StoredRegionData regionData in storedMap.Regions)
-			Regions.Add(new RegionData(regionData, cachedUntiPositions[regionData.Color]));
+			Regions.Add(new RegionData(regionData, cachedUntiPositions[regionData.Color], new Vector2(cachedRegionPoints[regionData.Color].Average(v => v.x), cachedRegionPoints[regionData.Color].Average(v => v.y))));
 
 		Dictionary<Color, RegionData> colorToRegion = new Dictionary<Color, RegionData>();
 		foreach (RegionData region in Regions)
@@ -74,6 +77,8 @@ public class MapData
 	private void CheckBorders(int i, int j)
 	{
 		Color c = MapRegionsTexture.GetPixel(i, j);
+
+		cachedRegionPoints[c].Add(new Vector2(i, j));
 
 		if (i - 1 > 0)
 			CheckPixelNeighborBorder(c, MapRegionsTexture.GetPixel(i - 1, j));

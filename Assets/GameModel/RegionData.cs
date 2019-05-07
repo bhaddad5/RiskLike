@@ -12,11 +12,12 @@ public class RegionData
 	public List<Vector2> UnitPositions;
 	public Vector2 RegionCenter;
 
-	public RegionData(StoredRegionData storedRegion, List<Vector2> unitPositions)
+	public RegionData(StoredRegionData storedRegion, List<Vector2> unitPositions, Vector2 regionCenter)
 	{
 		Name.Value = storedRegion.Name;
 		Color = storedRegion.Color;
 		UnitPositions = unitPositions;
+		RegionCenter = regionCenter;
 
 		foreach (StoredIndividualUnitData storedUnit in storedRegion.ContainedUnits)
 			Units.Add(new UnitData(storedUnit, this));

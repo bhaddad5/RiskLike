@@ -15,7 +15,6 @@ public class UnitVisualizer : MonoBehaviour
 
 	private void CurrentOccupiedRegionOnChangeEvent(RegionData arg1, RegionData arg2)
 	{
-		Debug.Log("Now in region: " + arg1.Name);
 		var unitIndex = arg1.Units.IndexOf(unit);
 		var pos = arg1.UnitPositions[unitIndex];
 
