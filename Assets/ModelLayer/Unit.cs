@@ -10,6 +10,8 @@ public class Unit
 
 	public Setting<Faction> Faction = new Setting<Faction>();
 
+	public Setting<bool> Selected = new Setting<bool>();
+
 	public string TypeName;
 
 	public float MaxHP;
@@ -85,7 +87,7 @@ public class Unit
 		region.Faction.Value = Faction.Value;
 	}
 
-	private const float healRate = .3f;
+	private const float healRate = 1f;
 	public void Refresh()
 	{
 		Movement.Value = MaxMovement;

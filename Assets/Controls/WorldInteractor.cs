@@ -8,7 +8,21 @@ public class WorldInteractor : MonoBehaviour
 	public MovementPathVisualizer PathVis;
 
 	private Region currPointedRegion = null;
-	private Unit currSelectedUnit = null;
+	private Setting<Unit> currSelectedUnit = new Setting<Unit>();
+
+	void Start()
+	{
+		currSelectedUnit.ChangeEvent += CurrSelectedUnitOnChangeEvent;
+		CurrSelectedUnitOnChangeEvent(currSelectedUnit.Value, null);
+	}
+
+	private void CurrSelectedUnitOnChangeEvent(Unit arg1, Unit arg2)
+	{
+		if(arg1 != null)
+			arg1.Selected.Value = true;
+		if(arg2 != null)
+			arg2.Selected.Value = false;
+	}
 
 	void Update()
 	{
@@ -23,37 +37,37 @@ public class WorldInteractor : MonoBehaviour
 
 		if (Input.GetMouseButtonUp(0))
 		{
-			currSelectedUnit = null;
+			currSelectedUnit.Value = null;
 			
 			if (Physics.Raycast(GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit, 1000f, LayerMask.GetMask("Units")))
 			{
 				var unit = hit.transform.GetComponentInParent<UnitVisualizer>();
-				currSelectedUnit = unit.Unit;
+				currSelectedUnit.Value = unit.Unit;
 			}
 		}
 
-		if (currSelectedUnit != null && currPointedRegion != null &&
-		    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion &&
-		    currSelectedUnit.CheckValidMovement(currPointedRegion))
+		if (currSelectedUnit.Value != null && currPointedRegion != null &&
+		    currSelectedUnit.Value.CurrentOccupiedRegion.Value != currPointedRegion &&
+		    currSelectedUnit.Value.CheckValidMovement(currPointedRegion))
 		{
 			PathVis.VisualizePath(new List<Vector3>()
 			{
-				RegionCenterToWorldPos(currSelectedUnit.CurrentOccupiedRegion.Value.RegionCenter),
+				RegionCenterToWorldPos(currSelectedUnit.Value.CurrentOccupiedRegion.Value.RegionCenter),
 				RegionCenterToWorldPos(currPointedRegion.RegionCenter)
-			});
+			},  currSelectedUnit.Value.Faction.Value != currPointedRegion.Faction.Value);
 		}
 		else
 		{
-			PathVis.VisualizePath(new List<Vector3>());
+			PathVis.VisualizePath(new List<Vector3>(), false);
 		}
 
 		if (Input.GetMouseButtonUp(1))
 		{
-			if (currSelectedUnit != null && currPointedRegion != null &&
-			    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion &&
-			    currSelectedUnit.CheckValidMovement(currPointedRegion))
+			if (currSelectedUnit.Value != null && currPointedRegion != null &&
+			    currSelectedUnit.Value.CurrentOccupiedRegion.Value != currPointedRegion &&
+			    currSelectedUnit.Value.CheckValidMovement(currPointedRegion))
 			{
-				currSelectedUnit.SetRegion(currPointedRegion);
+				currSelectedUnit.Value.SetRegion(currPointedRegion);
 			}
 		}
 	}
@@ -72,5 +86,11 @@ public class WorldInteractor : MonoBehaviour
 				unit.Refresh();
 			}
 		}
+	}
+
+	void OnDestroy()
+	{
+		currSelectedUnit.ChangeEvent -= CurrSelectedUnitOnChangeEvent;
+
 	}
 }
