@@ -218,15 +218,21 @@ MonoBehaviour:
     Regions:
     - Name: Black
       Color: {r: 0, g: 0, b: 0, a: 1}
+      Passable: 0
+      MoveDifficulty: 1
       ContainedUnits: []
     - Name: Blue
       Color: {r: 0, g: 0, b: 1, a: 1}
+      Passable: 1
+      MoveDifficulty: 1
       ContainedUnits:
       - UnitName: 1st Green Cube
         TypeId: GreenCube
         HealthPercent: 1
     - Name: Red
       Color: {r: 1, g: 0, b: 0, a: 1}
+      Passable: 1
+      MoveDifficulty: 1
       ContainedUnits:
       - UnitName: 1st Blue Sphere
         TypeId: BlueSphere
@@ -236,12 +242,18 @@ MonoBehaviour:
         HealthPercent: 0.6
     - Name: Yellow
       Color: {r: 1, g: 1, b: 0, a: 1}
+      Passable: 1
+      MoveDifficulty: 1
       ContainedUnits: []
     - Name: Green
       Color: {r: 0, g: 1, b: 0, a: 1}
+      Passable: 1
+      MoveDifficulty: 1
       ContainedUnits: []
     - Name: Cyane
       Color: {r: 0, g: 1, b: 1, a: 1}
+      Passable: 1
+      MoveDifficulty: 1
       ContainedUnits: []
 --- !u!4 &233892945
 Transform:

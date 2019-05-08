@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MapData
+public class Map
 {
 	public string Name;
 	public Texture2D MapRegionsTexture;
-	public List<RegionData> Regions = new List<RegionData>();
+	public List<Region> Regions = new List<Region>();
 
 	#region Proccess Map Data into usable form
 
@@ -15,7 +15,7 @@ public class MapData
 	private Dictionary<Color, List<Vector2>> cachedUntiPositions = new Dictionary<Color, List<Vector2>>();
 	private Dictionary<Color, List<Vector2>> cachedRegionPoints = new Dictionary<Color, List<Vector2>>();
 
-	public MapData(StoredMapData storedMap)
+	public Map(StoredMapData storedMap)
 	{
 		Name = storedMap.Name;
 		MapRegionsTexture = new Texture2D(storedMap.MapRegions.width, storedMap.MapRegions.height, TextureFormat.RGB24, false);
@@ -37,13 +37,13 @@ public class MapData
 			CheckBorders(i, j);
 
 		foreach (StoredRegionData regionData in storedMap.Regions)
-			Regions.Add(new RegionData(regionData, cachedUntiPositions[regionData.Color], new Vector2(cachedRegionPoints[regionData.Color].Average(v => v.x), cachedRegionPoints[regionData.Color].Average(v => v.y))));
+			Regions.Add(new Region(regionData, cachedUntiPositions[regionData.Color], new Vector2(cachedRegionPoints[regionData.Color].Average(v => v.x), cachedRegionPoints[regionData.Color].Average(v => v.y))));
 
-		Dictionary<Color, RegionData> colorToRegion = new Dictionary<Color, RegionData>();
-		foreach (RegionData region in Regions)
+		Dictionary<Color, Region> colorToRegion = new Dictionary<Color, Region>();
+		foreach (Region region in Regions)
 			colorToRegion[region.Color] = region;
 
-		foreach (RegionData region in Regions)
+		foreach (Region region in Regions)
 		{
 			foreach (Color borderColor in cachedBorders[region.Color])
 			{

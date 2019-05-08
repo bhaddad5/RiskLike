@@ -9,9 +9,9 @@ public class MapVisualizer : MonoBehaviour
 
 	public static float MapScaler = .05f;
 
-	private MapData Map;
+	private Map Map;
 
-	public void Setup(MapData m)
+	public void Setup(Map m)
 	{
 		Map = m;
 		GetComponentInChildren<MeshRenderer>().material.mainTexture = Map.MapRegionsTexture;
@@ -20,7 +20,7 @@ public class MapVisualizer : MonoBehaviour
 		transform.localPosition = new Vector3(transform.localScale.x/2f, 0, transform.localScale.z/2f);
 		gameObject.GetComponent<BoxCollider>().size = transform.localScale;
 		
-		foreach (RegionData region in m.Regions)
+		foreach (Region region in m.Regions)
 		{
 			var r = GameObject.Instantiate(regionPrefab);
 			r.Setup(region);
@@ -28,11 +28,11 @@ public class MapVisualizer : MonoBehaviour
 
 	}
 
-	public RegionData GetRegionAtCoordinate(Vector2 pos)
+	public Region GetRegionAtCoordinate(Vector2 pos)
 	{
 		var color = Map.MapRegionsTexture.GetPixel((int)pos.x, (int)pos.y);
 
-		foreach (RegionData region in Map.Regions)
+		foreach (Region region in Map.Regions)
 		{
 			if (color.Equals(region.Color))
 				return region;

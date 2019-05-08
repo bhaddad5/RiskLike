@@ -11,6 +11,6 @@ public class SceneController : MonoBehaviour
     void Start()
     {
 	    var vis = GameObject.Instantiate(mapVisPrefab);
-		vis.Setup(new MapData(storedMap));
+		vis.Setup(new Map(storedMap));
     }
 }

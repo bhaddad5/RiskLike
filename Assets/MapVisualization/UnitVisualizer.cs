@@ -10,9 +10,9 @@ public class UnitVisualizer : MonoBehaviour
 	public Image HealthBar;
 	public Image HealthBarBacking;
 
-	public UnitData Unit;
+	public Unit Unit;
 
-	public void Setup(UnitData unit)
+	public void Setup(Unit unit)
 	{
 		Unit = unit;
 		Unit.CurrentOccupiedRegion.ChangeEvent += CurrentOccupiedRegionOnChangeEvent;
@@ -41,7 +41,7 @@ public class UnitVisualizer : MonoBehaviour
 		UnitName.text = arg1;
 	}
 
-	private void CurrentOccupiedRegionOnChangeEvent(RegionData arg1, RegionData arg2)
+	private void CurrentOccupiedRegionOnChangeEvent(Region arg1, Region arg2)
 	{
 		var unitIndex = arg1.Units.IndexOf(Unit);
 		var pos = arg1.UnitPositions[unitIndex];

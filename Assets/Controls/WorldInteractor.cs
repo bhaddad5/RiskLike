@@ -6,8 +6,8 @@ public class WorldInteractor : MonoBehaviour
 {
 	public MovementPathVisualizer PathVis;
 
-	private RegionData currPointedRegion = null;
-	private UnitData currSelectedUnit = null;
+	private Region currPointedRegion = null;
+	private Unit currSelectedUnit = null;
 
 	void Update()
 	{
@@ -32,7 +32,8 @@ public class WorldInteractor : MonoBehaviour
 		}
 
 		if (currSelectedUnit != null && currPointedRegion != null &&
-		    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion)
+		    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion &&
+		    currSelectedUnit.CheckValidMovement(currPointedRegion))
 		{
 			PathVis.VisualizePath(new List<Vector3>()
 			{
@@ -48,7 +49,8 @@ public class WorldInteractor : MonoBehaviour
 		if (Input.GetMouseButtonUp(1))
 		{
 			if (currSelectedUnit != null && currPointedRegion != null &&
-			    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion)
+			    currSelectedUnit.CurrentOccupiedRegion.Value != currPointedRegion &&
+			    currSelectedUnit.CheckValidMovement(currPointedRegion))
 			{
 				currSelectedUnit.SetRegion(currPointedRegion);
 			}

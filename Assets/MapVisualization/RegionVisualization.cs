@@ -7,12 +7,12 @@ public class RegionVisualization : MonoBehaviour
 {
 	public UnitVisualizer UnitPrefab;
 
-	private RegionData region;
+	private Region region;
 
-	public void Setup(RegionData region)
+	public void Setup(Region region)
 	{
 		this.region = region;
-		foreach (UnitData unit in region.Units)
+		foreach (Unit unit in region.Units)
 		{
 			var instantiatedUnit = GameObject.Instantiate(UnitPrefab);
 			instantiatedUnit.Setup(unit);
