@@ -350,7 +350,19 @@ MonoBehaviour:
       Passable: 1
       MoveDifficulty: 1
       FactionId: AI
-      ContainedUnits: []
+      ContainedUnits:
+      - UnitName: 2nd Green Cube
+        TypeId: GreenCube
+        FactionId: Player
+        HealthPercent: 1
+      - UnitName: 3rd Green Cube
+        TypeId: GreenCube
+        FactionId: Player
+        HealthPercent: 1
+      - UnitName: 4th Green Cube
+        TypeId: GreenCube
+        FactionId: Player
+        HealthPercent: 1
     - Name: Green
       Color: {r: 0, g: 1, b: 0, a: 1}
       Passable: 1
@@ -704,14 +716,14 @@ MonoBehaviour:
     Attack: 1
     Defense: 2
     Movement: 1
-    Health: 3
+    Health: 6
     PrefabId: GreenCube
   - Id: BlueSphere
     TypeName: Blue Sphere
-    Attack: 2
+    Attack: 1.5
     Defense: 1
     Movement: 2
-    Health: 4
+    Health: 5
     PrefabId: BlueSphere
 --- !u!4 &739511223
 Transform:
@@ -742,6 +754,7 @@ MonoBehaviour:
   factions:
   - FactionId: Player
     Name: Player
+    Color: {r: 0, g: 0.14352083, b: 1, a: 1}
     IsPlayer: 1
     Minerals: 50
     Alloys: 50
@@ -749,6 +762,7 @@ MonoBehaviour:
     Allies: []
   - FactionId: AI
     Name: AI
+    Color: {r: 1, g: 0, b: 0, a: 1}
     IsPlayer: 0
     Minerals: 50
     Alloys: 50
