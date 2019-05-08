@@ -6,6 +6,7 @@ public class Region
 {
 	public Setting<string> Name = new Setting<string>();
 	public NotifyList<Unit> Units = new NotifyList<Unit>();
+	public Setting<Faction> Faction = new Setting<Faction>();
 
 	public Color Color;
 	public List<Region> BorderingRegions = new List<Region>();
@@ -23,6 +24,7 @@ public class Region
 		RegionCenter = regionCenter;
 		Passable = storedRegion.Passable;
 		MoveDifficulty = storedRegion.MoveDifficulty;
+		Faction.Value = FactionsLookup.GetFactionDataById(storedRegion.FactionId);
 
 		foreach (StoredIndividualUnitData storedUnit in storedRegion.ContainedUnits)
 			Units.Add(new Unit(storedUnit, this));

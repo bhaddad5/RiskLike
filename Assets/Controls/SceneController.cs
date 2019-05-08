@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneController : MonoBehaviour
 {
 	public Map Map;
+	public Dictionary<string, Faction> Factions = new Dictionary<string, Faction>();
 
 	[SerializeField] private MapVisualizer mapVisPrefab;
 	[SerializeField] private StoredMapData storedMap;

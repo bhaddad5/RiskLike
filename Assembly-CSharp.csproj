@@ -63,12 +63,15 @@
     <Compile Include="Assets\Controls\CameraController.cs" />
     <Compile Include="Assets\Controls\SceneController.cs" />
     <Compile Include="Assets\Controls\WorldInteractor.cs" />
+    <Compile Include="Assets\DataLayer\FactionsLookup.cs" />
+    <Compile Include="Assets\DataLayer\StoredFactionData.cs" />
     <Compile Include="Assets\DataLayer\StoredIndividualUnitData.cs" />
     <Compile Include="Assets\DataLayer\StoredMapData.cs" />
     <Compile Include="Assets\DataLayer\StoredRegionData.cs" />
     <Compile Include="Assets\DataLayer\StoredUnitTypeData.cs" />
     <Compile Include="Assets\DataLayer\UnitPrefabsLookup.cs" />
     <Compile Include="Assets\DataLayer\UnitTypesLookup.cs" />
+    <Compile Include="Assets\ModelLayer\Faction.cs" />
     <Compile Include="Assets\ModelLayer\Map.cs" />
     <Compile Include="Assets\ModelLayer\Region.cs" />
     <Compile Include="Assets\ModelLayer\Unit.cs" />

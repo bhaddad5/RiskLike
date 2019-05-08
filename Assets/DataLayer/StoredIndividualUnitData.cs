@@ -9,6 +9,7 @@ public class StoredIndividualUnitData
 {
 	public string UnitName;
 	public string TypeId;
+	public string FactionId;
 
 	public float HealthPercent = 1;
 }

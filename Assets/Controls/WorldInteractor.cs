@@ -65,11 +65,9 @@ public class WorldInteractor : MonoBehaviour
 
 	public void HandleEndTurn()
 	{
-		Debug.Log("Hit!");
-
-		foreach (var region in SceneController.Map.Regions)
+		foreach (var faction in FactionsLookup.factionLookup.Values)
 		{
-			foreach (Unit unit in region.Units)
+			foreach (Unit unit in faction.Units)
 			{
 				unit.Refresh();
 			}

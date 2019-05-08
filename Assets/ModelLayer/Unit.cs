@@ -8,6 +8,8 @@ public class Unit
 	public Setting<float> HP = new Setting<float>();
 	public Setting<float> Movement = new Setting<float>();
 
+	public Setting<Faction> Faction = new Setting<Faction>();
+
 	public string TypeName;
 
 	public float MaxHP;
@@ -35,6 +37,9 @@ public class Unit
 		PrefabId = storedUnitType.PrefabId;
 
 		CurrentOccupiedRegion.Value = region;
+		Faction.Value = FactionsLookup.GetFactionDataById(unitData.FactionId);
+
+		Faction.Value.Units.Add(this);
 	}
 
 	public bool CheckValidMovement(Region regionToMoveTo)
@@ -77,6 +82,7 @@ public class Unit
 		CurrentOccupiedRegion.Value?.Units?.Remove(this);
 		region.Units.Add(this);
 		CurrentOccupiedRegion.Value = region;
+		region.Faction.Value = Faction.Value;
 	}
 
 	private const float healRate = .3f;

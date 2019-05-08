@@ -12,5 +12,6 @@ public class StoredRegionData
 	public bool Passable;
 	public float MoveDifficulty = 1;
 
+	public string FactionId;
 	public List<StoredIndividualUnitData> ContainedUnits;
 }
