@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
+	public Map Map;
+
 	[SerializeField] private MapVisualizer mapVisPrefab;
 	[SerializeField] private StoredMapData storedMap;
 
@@ -11,6 +13,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {
 	    var vis = GameObject.Instantiate(mapVisPrefab);
-		vis.Setup(new Map(storedMap));
+	    Map = new Map(storedMap);
+		vis.Setup(Map);
     }
 }

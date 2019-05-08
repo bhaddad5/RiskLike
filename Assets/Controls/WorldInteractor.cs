@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorldInteractor : MonoBehaviour
 {
+	public SceneController SceneController;
 	public MovementPathVisualizer PathVis;
 
 	private Region currPointedRegion = null;
@@ -60,5 +61,18 @@ public class WorldInteractor : MonoBehaviour
 	private Vector3 RegionCenterToWorldPos(Vector2 regionCenter)
 	{
 		return new Vector3(regionCenter.x * MapVisualizer.MapScaler, 0, regionCenter.y * MapVisualizer.MapScaler);
+	}
+
+	public void HandleEndTurn()
+	{
+		Debug.Log("Hit!");
+
+		foreach (var region in SceneController.Map.Regions)
+		{
+			foreach (Unit unit in region.Units)
+			{
+				unit.Refresh();
+			}
+		}
 	}
 }

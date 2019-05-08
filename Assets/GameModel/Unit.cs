@@ -28,6 +28,7 @@ public class Unit
 		MaxHP = storedUnitType.Health;
 		Attack = storedUnitType.Attack;
 		Defense = storedUnitType.Defense;
+		MaxMovement = storedUnitType.Movement;
 		Movement.Value = storedUnitType.Movement;
 		HP.Value = unitData.HealthPercent * storedUnitType.Health;
 
@@ -49,7 +50,8 @@ public class Unit
 		frontierTiles.Insert(CurrentOccupiedRegion.Value, Movement.Value);
 		while (frontierTiles.Count > 0)
 		{
-			possibleMoves[frontierTiles.TopValue()] = frontierTiles.TopKey();
+			if(!possibleMoves.ContainsKey(frontierTiles.TopValue()))
+				possibleMoves[frontierTiles.TopValue()] = frontierTiles.TopKey();
 			float currDifficulty = frontierTiles.TopKey();
 			Region currRegion = frontierTiles.Pop();
 
@@ -75,5 +77,12 @@ public class Unit
 		CurrentOccupiedRegion.Value?.Units?.Remove(this);
 		region.Units.Add(this);
 		CurrentOccupiedRegion.Value = region;
+	}
+
+	private const float healRate = .3f;
+	public void Refresh()
+	{
+		Movement.Value = MaxMovement;
+		HP.Value = Mathf.Min(HP.Value + healRate, MaxHP);
 	}
 }
